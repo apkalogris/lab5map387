@@ -33,6 +33,13 @@
                 opacity: 0.7;
             }
 
+            
+<!-- Load the billboard.js stylesheet -->
+<link href="https://cdn.jsdelivr.net/npm/billboard.js@4.1.1/dist/billboard.min.css" rel="stylesheet">
+
+<!-- Load billboard.js (the "pkgd" version already includes D3) -->
+<script src="https://cdn.jsdelivr.net/npm/billboard.js@4.1.1/dist/billboard.pkgd.min.js"></script>
+
             fillColor: getColor(feature.properties.popdem),
         </style>
 
@@ -47,6 +54,9 @@
               center: [41.81, -87.71],
               zoom: 10
             });
+
+            
+<div id="chart"></div>
 
              L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
                attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
