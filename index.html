@@ -106,7 +106,8 @@
                             ['Black', props.Black],
                             ['Hispanic', props.Hispanic],
                             ['Asian', props.Asian],
-                            ['AmericanIn', props.AmericanIn],
+                            ['Indigneous', props.AmericanIn],
+                            ['Mixed', props.Multiracia],
                             ['Other', props.Other]
                         ],
 
@@ -121,7 +122,7 @@
                     },
 
                     color:{ // colors of donut segments, same order as the data defined under columns
-                        pattern:["#5fd8fa", "#08700a", "#fa7132", "#e8076c", "#e0d231", "#8a8a8a"] // a colorblind-safe set (Okabe-Ito)
+                        pattern:["#5fd8fa", "#08700a", "#fa7132", "#e8076c", "#e0d231", "#9542f5", "#8a8a8a"] // a colorblind-safe set (Okabe-Ito)
                     }
                 });
             }
@@ -181,7 +182,7 @@
                 var div = L.DomUtil.create('div', 'legend'),
                     grades = [0, 2000, 6000, 8000, 12500]; // The break values to define the intervals of population, note we begin from 0 here
 
-                div.innerHTML = '<b>Population Density <br> 2011 <br></b>'; // The legend title (HTML-based), in this case it's Population Density 2011
+                div.innerHTML = '<b>Population Density <br> 2020 <br></b>'; // The legend title (HTML-based), in this case it's Population Density 2011
 
                 // Loop through our the classes and generate a label with a color box for each interval.
                 // If you are creating a choropleth map, you DO NOT need to change lines below.
