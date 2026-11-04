@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,8 +12,12 @@
            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
            crossorigin=""></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/billboard.js@4.1.1/dist/billboard.min.css">
-<script src="https://cdn.jsdelivr.net/npm/billboard.js@4.1.1/dist/billboard.pkgd.min.js"></script>
+        
+        <!-- Load the billboard.js stylesheet -->
+        <link href="https://cdn.jsdelivr.net/npm/billboard.js@4.1.1/dist/billboard.min.css" rel="stylesheet">
+
+        <!-- Load billboard.js (the "pkgd" version already includes D3) -->
+        <script src="https://cdn.jsdelivr.net/npm/billboard.js@4.1.1/dist/billboard.pkgd.min.js"></script>
         
         <script type="text/javascript" src="data.js"></script>
 
@@ -40,7 +45,8 @@
 
     <body>
         <div id="map" style="height: 500px"></div>
-<div id="chart"></div>
+        
+        <div id="chart"></div>
         
         <script type="text/javascript">
 
@@ -58,7 +64,7 @@
             function getColor(value) {
                 return value > 12500 ? '#54278f':
                        value > 8000  ? '#756bb1':
-                       value > 6000  ? '#9e9ac8':
+                       value > 5000  ? '#9e9ac8':
                        value > 2000  ? '#cbc9e2':
                                      '#f2f0f7';
             }
@@ -71,6 +77,53 @@
                     color: 'gray',
                     fillOpacity: 0.9
                 };
+            }
+            
+                          
+            function makeChart(props) {
+            // props is just a variable, which will be replaced with the layer's properties 
+            // when using the function
+                bb.generate({   
+
+                    bindto: '#chart',  // id of the chart div, as defined earlier in the chart div
+
+                    size: {  // size (height and width) of the chart, by pixels
+                        height: 180,
+                        width: 180        
+                    },
+
+                    title:{
+                        text: props.NAME  // Use the NAME attribute as chart title 
+                                          // This is displayed above the chart
+                                          // You may use other strings, HTML elements or combined
+                    },
+
+                    data: {
+                        // Define the actual data
+                        // I use the attribute values as data for making the charts
+                        // The strings are labels of the charts (shown in legend)
+                        columns: [  
+                            ['White', props.White],
+                            ['Black', props.Black],
+                            ['Asian', props.Asian],
+                            ['Mixed', props.Mixed],
+                            ['Other', props.Other]
+                        ],
+
+                        type: 'donut',  // chart type
+                    },
+
+                    donut:{ // options to customize the donut chart
+                        label: {
+                            show: false // set to not show labels on the segments (too busy)
+                        },
+                        width: 30  // width of donut
+                    },
+
+                    color:{ // colors of donut segments, same order as the data defined under columns
+                        pattern:["#E69F00", "#56B4E9", "#009E73", "#0072B2", "#CC79A7"] // a colorblind-safe set (Okabe-Ito)
+                    }
+                });
             }
             
             function highlightFeature(e) {
@@ -87,30 +140,16 @@
                 // Fix display layer problems with IE and Opera (no need to change anything)
                 if (!L.Browser.ie && !L.Browser.opera) {
                     layer.bringToFront();
-                }         
+                }     
+                
+                makeChart(layer.feature.properties);
             }
         
             var geojson;
             
             function resetHighlight(e) {
                 geojson.resetStyle(e.target);
-                
-function highlightFeature(e) {
-    var layer = e.target;
 
-    makeChart(layer.feature.properties); // <-- triggers the chart on hover
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '6',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }         
-}
             }
 
             // Combine the mouseover and mouseout actions (defined above)
@@ -143,37 +182,6 @@ function highlightFeature(e) {
                     grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
                 }
 
-                function makeChart(props) {
-    bb.generate({   
-        bindto: '#chart',
-        size: {
-            height: 200,
-            width: 250        
-        },
-        title: {
-            text: 'Tract: ' + props.GEOID
-        },
-        data: {
-            columns: [  
-                ['White', props.White],
-                ['Black', props.Black],
-                ['Hispanic', props.Hispanic],
-                ['Asian', props.Asian],
-                ['Multi-racial', props.Multiracia],
-                ['Other', props.Other]
-            ],
-            type: 'donut'
-        },
-        donut: {
-            label: { show: false },
-            width: 30
-        },
-        color: {
-            pattern: ["#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#CC79A7"]
-        }
-    });
-}
-                
                 return div;
             };
 
