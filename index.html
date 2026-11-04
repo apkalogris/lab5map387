@@ -70,7 +70,7 @@
 
             function style(feature){
                 return {
-                    fillColor: getColor(feature.properties.pop_den),   // pop_den is the field name for the population density data
+                    fillColor: getColor(feature.properties.popdem),   // pop_den is the field name for the population density data
                     weight: 2,
                     opacity: 1,
                     color: 'gray',
@@ -109,10 +109,10 @@
                             ['Other', props.Other]
                         ],
 
-                        type: 'donut',  // chart type
+                        type: 'bar',  // chart type
                     },
 
-                    donut:{ // options to customize the donut chart
+                    bar:{ // options to customize the donut chart
                         label: {
                             show: false // set to not show labels on the segments (too busy)
                         },
