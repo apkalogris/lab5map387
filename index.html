@@ -104,15 +104,16 @@
                         columns: [  
                             ['White', props.White],
                             ['Black', props.Black],
+                            ['Hispanic', props.Hispanic],
                             ['Asian', props.Asian],
-                            ['Mixed', props.Mixed],
+                            ['AmericanIn', props.AmericanIn],
                             ['Other', props.Other]
                         ],
 
                         type: 'bar',  // chart type
                     },
 
-                    bar:{ // options to customize the donut chart
+                    axis:{ // options to customize the donut chart
                         label: {
                             show: false // set to not show labels on the segments (too busy)
                         },
@@ -120,7 +121,7 @@
                     },
 
                     color:{ // colors of donut segments, same order as the data defined under columns
-                        pattern:["#E69F00", "#56B4E9", "#009E73", "#0072B2", "#CC79A7"] // a colorblind-safe set (Okabe-Ito)
+                        pattern:["#E69F00", "#56B4E9", "#009E73", "#0072B2", "#CC79A7", "#E69F00"] // a colorblind-safe set (Okabe-Ito)
                     }
                 });
             }
